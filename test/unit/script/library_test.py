@@ -5,6 +5,7 @@ from scripts.library import Book, Library, Client
 # Pytest
 
 def test_book():
+    
     # Test check_out method
     book = Book("To Kill a Mockingbird", "Harper Lee")
     assert not book.is_checked_out
@@ -16,6 +17,7 @@ def test_book():
     assert not book.is_checked_out
 
 def test_library():
+
     library = Library()
 
     # Test add_book method
@@ -44,6 +46,7 @@ def test_library():
     assert str(e.value) == "Sorry, Pride and Prejudice is not in the library."
 
 def test_client():
+
     library = Library()
     book = Book("To Kill a Mockingbird", "Harper Lee")
     library.add_book(book)
@@ -73,6 +76,55 @@ def test_client():
 
 # Unit Test
 import unittest
+
+class TestBookMethods(unittest.TestCase):
+
+    def setUp(self):
+        self.book = Book("To Kill a Mockingbird", "Harper Lee")
+
+    def test_check_out(self):
+        self.book.check_out()
+        self.assertTrue(self.book.is_checked_out)
+        self.assertEqual(f"{self.book.title} by {self.book.author} has been checked out.", 
+                        "To Kill a Mockingbird by Harper Lee has been checked out.")
+
+    def test_check_in(self):
+        self.book.check_out()
+        self.book.check_in()
+        self.assertFalse(self.book.is_checked_out)
+        self.assertEqual(f"{self.book.title} by {self.book.author} has been checked in.", 
+                        "To Kill a Mockingbird by Harper Lee has been checked in.")
+
+class TestLibraryMethods(unittest.TestCase):
+
+    def setUp(self):
+        self.library = Library()
+        self.book1 = Book("To Kill a Mockingbird", "Harper Lee")
+        self.library.add_book(self.book1)
+        self.book2 = Book("Pride and Prejudice", "Jane Austen")
+        self.library.add_book(self.book2)
+
+    def test_add_book(self):
+        self.assertIn(self.book1, self.library.books)
+        self.assertIn(self.book2, self.library.books)
+        self.assertEqual(f"{self.book1.title} by {self.book1.author} has been added to the library.", 
+                        "To Kill a Mockingbird by Harper Lee has been added to the library.")
+        self.assertEqual(f"{self.book2.title} by {self.book2.author} has been added to the library.", 
+                        "Pride and Prejudice by Jane Austen has been added to the library.")
+
+    def test_check_out_book(self):
+        self.library.check_out_book("To Kill a Mockingbird")
+        self.assertTrue(self.book1.is_checked_out)
+        self.library.check_out_book("Pride and Prejudice")
+        self.assertTrue(self.book2.is_checked_out)
+
+    def test_check_in_book(self):
+        self.library.check_out_book("To Kill a Mockingbird")
+        self.library.check_out_book("Pride and Prejudice")
+        self.library.check_in_book("To Kill a Mockingbird")
+        self.assertFalse(self.book1.is_checked_out)
+        self.library.check_in_book("Pride and Prejudice")
+        self.assertFalse(self.book2.is_checked_out)
 
 class TestClientMethods(unittest.TestCase):
 
