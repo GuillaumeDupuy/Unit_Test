@@ -56,7 +56,7 @@ class Client:
                 book.check_in()
                 self.checked_out_books.remove(book)
                 return
-        print(f"Sorry, {title} is not checked out.")
+        raise Exception(f"Sorry, {title} is not checked out.")
 
 library = Library()
 
