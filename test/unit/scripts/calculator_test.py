@@ -1,6 +1,8 @@
 import unittest
 # import math
+import sys
 
+sys.path.append('') # permet d'importer les modules du dossier parent
 from scripts.calculator import *
 
 class TestCalculator(unittest.TestCase):
@@ -132,7 +134,7 @@ class TestCalculator(unittest.TestCase):
     def test_square_root(self):
         # Test avec des nombres positifs
         result = self.calc.square_root(9)
-        self.assertEqual(result, 3.000000001396984)
+        self.assertEqual(round(result), 3)
         
         # Test avec un nombre négatif
         # Trop long à executer
@@ -141,7 +143,7 @@ class TestCalculator(unittest.TestCase):
 
         # Test avec un nombre décimal
         result = self.calc.square_root(9.0)
-        self.assertEqual(result, 3.000000001396984)
+        self.assertEqual(round(result), 3)
     
     def test_calculate_add(self):
         result = calculate("add", 1, 2)

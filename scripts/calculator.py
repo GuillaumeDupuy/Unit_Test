@@ -26,7 +26,7 @@ class Calculator:
         # for i in range(y):
         #     result *= x
         # return result
-        
+        # -->
         # if y >= 0:
         #     result = 1
         #     for i in range(y):
@@ -34,6 +34,7 @@ class Calculator:
         #     return result
         # else:
         #     return 1 / math.pow(x, -y)
+        # -->
         return x ** y
 
     # def square_root(x): --> def square_root(self, x):
@@ -81,8 +82,9 @@ def calculate(operation, x, y=None):
 #         result = calc.square_root(x)
 #     return result
 
-# operation = input("Enter the operation you would like to perform (add,subtract, multiply, divide, square_root, power): ")
-# num1 = int(input("Enter the first number : "))
-# num2 = int(input("Enter the secod number : "))
+if __name__ == "__main__":
+    operation = input("Enter the operation you would like to perform (add,subtract, multiply, divide, square_root, power): ")
+    num1 = int(input("Enter the first number : "))
+    num2 = int(input("Enter the secod number : "))
 
-# print(calculate(operation, num1, num2))
+    print(calculate(operation, num1, num2))
